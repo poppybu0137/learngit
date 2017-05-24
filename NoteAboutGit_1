@@ -1,0 +1,63 @@
+1.Git本地操作
+在linux上安装：
+-$sudo apt-get install git
+
+配置用户信息
+-$git config --global user.name "Poppy_Bu"
+-$git config --global user.email "Poppy_Bu@asus.com"
+-$git config --list 查看config配置
+
+获取Git仓库：
+（1）在工作目录中初始化新仓库
+-$git init
+（2）克隆现有的仓库
+-$git clone [crl] [filename]
+
+检查当前文件状态
+-$git status
+添加新文件
+
+-$git add filenname
+-$git add .
+
+提交更新
+-$git commit -s -m "提交信息"
+
+删除文件
+可以将已经提交到Git的文件删除
+-$rm [filename]
+-$git status
+((1))确定要从版本库中删除该文件
+-$git rm [filename]
+-$git commit -m "提交说明"
+((2))误删
+-$git checkout -- [filename]
+
+查看提交历史
+-$git log
+-$git log --pretty=oneline
+查看历史记录的每一次命令
+-$git reflog
+(3)当前版本HEAD;上一个版本HEAD^;上上一个版本HEAD^^;往上100个版本HEAD~100
+将当前版本回退到上一个版本
+-$git reset
+(-$git reset --hard HEAD^)或(-$git reset --hard [哈希值])
+
+用命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区
+git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。
+
+--------------------------------------------------------------------
+----------------------------------------------------------------------
+(1)-$git status 查阅仓库当前的状态
+(2)-$git diff 查看具体修改的内容
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+小结
+(1)HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+
+(2)git commit只负责把暂存区的修改提交了，也就是第一次的修改被提交了，第二次的修改不会被提交。
+提交后，用git diff HEAD -- [filename] 命令可以查看工作区和版本库里面最新版本的区别。
+Git是如何跟踪修改的，每次修改，如果不add到暂存区，那就不会加入到commit中。
+
